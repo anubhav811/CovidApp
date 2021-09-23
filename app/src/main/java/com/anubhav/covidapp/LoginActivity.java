@@ -3,6 +3,7 @@ package com.anubhav.covidapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -24,86 +28,48 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText mEmail,mPassword;
-    Button login_btn;
-    Button signUpButton;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fireStore;
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmail = findViewById(R.id.et_email);
-        mPassword = findViewById(R.id.et_password);
-        fAuth = FirebaseAuth.getInstance();
-        fireStore=FirebaseFirestore.getInstance();
-        login_btn = findViewById(R.id.login_btn);
-        signUpButton= findViewById(R.id.signUpButton);
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),PatientActivity.class));
-            finish();
-        }
+        tabLayout=findViewById(R.id.tab_layout);
+        viewPager=findViewById(R.id.view_pager);
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
+
+       tabLayout.addTab(tabLayout.newTab().setText("Login"));
+       tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
+       tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
+
+        final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(),this,tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
-
-                if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email is Required.");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password is Required.");
-                    return;
-                }
-
-                if (password.length() < 6) {
-                    mPassword.setError("Password Must be >= 6 Characters");
-                    return;
-                }
-
-                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            DocumentReference df  = fireStore.collection("users").document(fAuth.getCurrentUser().getUid());
-                            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    if(documentSnapshot.getString("isDoctor") != null){
-                                        startActivity(new Intent(getApplicationContext(),DoctorActivity.class));
-
-                                    }else if(documentSnapshot.getString("isPatient") != null){
-                                        startActivity(new Intent(getApplicationContext(),PatientActivity.class));
-                                    }else if(documentSnapshot.getString("isPharmacist") != null){
-                                        startActivity(new Intent(getApplicationContext(),PharmacistActivity.class));
-                                    }
-                                }
-                            });
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-
-                    }
-                });
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
-            });
-                signUpButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-                    }
-                });
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
             }
 
-}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        tabLayout.setTranslationX(300);
+        tabLayout.setAlpha(0);
+
+        tabLayout.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(200).start();
+
+
+
+}}

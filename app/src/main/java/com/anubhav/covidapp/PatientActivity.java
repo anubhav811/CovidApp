@@ -59,9 +59,9 @@ public class PatientActivity extends AppCompatActivity {
         temperature = findViewById(R.id.temperature);
         lung_cap = findViewById(R.id.lung_cap);
         vitals = findViewById(R.id.vitals);
-        getVitalsButton = findViewById(R.id.getVitalsButton);
+//        getVitalsButton = findViewById(R.id.getVitalsButton);
         vitals.setVisibility(View.INVISIBLE);
-        seeAppointments = findViewById(R.id.seeAppointments);
+//        seeAppointments = findViewById(R.id.seeAppointments);
         appointmentText = findViewById(R.id.appointmentText);
         sendToDoc.setOnClickListener(new View.OnClickListener() {
             @Override
