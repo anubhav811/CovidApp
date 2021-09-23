@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".RegisterFragment">
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="342dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/round_border"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:hint="Your Name"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColorHint="#9A9393"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="342dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_border"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:hint="Your Age"
+        android:inputType="number"
+        android:padding="15dp"
+        android:textColorHint="#9A9393"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="342dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_border"
+        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:hint="Your Contact No."
+        android:inputType="number"
+        android:padding="15dp"
+        android:textColorHint="#9A9393"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_age"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_age" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="342dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_border"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:hint="Your email address"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:textColorHint="#9A9393"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_phone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_phone"
+        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="342dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_border"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:hint="Set Password"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:textColorHint="#9A9393"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="wrap_content"
+        android:textColor="#9A9393"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_password">
+
+        <RadioButton
+            android:buttonTint="#9A9393"
+            android:id="@+id/isPatient"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:textColor="#9A9393"
+
+            android:text="Register As Patient" />
+
+        <RadioButton
+            android:id="@+id/isDoctor"
+            android:paddingLeft="10dp"
+            android:buttonTint="#9A9393"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:textColor="#9A9393"
+
+            android:text="Register as Doctor" />
+
+        <RadioButton
+            android:buttonTint="#9A9393"
+            android:id="@+id/isPharmacist"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:textColor="#9A9393"
+            android:text="Register as Pharmacist" />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="106dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/round_border"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="Register"
+        app:backgroundTint="#0099ff"
+        app:layout_constraintBottom_toBottomOf="@+id/rg"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toEndOf="@+id/rg"
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
+        app:layout_constraintVertical_bias="0.338" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
